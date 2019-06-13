@@ -3,7 +3,7 @@ const data = require("../../DataBase/database");
 const paymentsRouter = express.Router();
 
 paymentsRouter.post("/", async (req, res) => {
-  const { email, amount } = req.query;
+  const { email, amount } = req.body;
   const currentAmount = await data.findByEmail(email);
 
   if (!email || !amount) {
@@ -23,14 +23,13 @@ paymentsRouter.post("/", async (req, res) => {
       return res.status(200).json({ message: "No Debt" });
     }
 
-    if (parseInt(amount) > parseInt(currentAmount)) {
+    if (amount > currentAmount) {
       return res.status(200).json({ message: "Amount exceeds debt" });
     } else {
-      const newDebt = await data.setByEmail(
-        email,
-        parseInt(amount) - parseInt(currentAmount)
-      );
-      res.status(200).json({ message: "successful payment", Debt: newDebt });
+      const newDebt = await data.setByEmail(email, amount - currentAmount);
+      return res
+        .status(200)
+        .json({ message: "successful payment", Debt: newDebt });
     }
   }
 });

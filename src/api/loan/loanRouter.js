@@ -5,7 +5,7 @@ const loanRouter = express.Router();
 const MAX = 1000;
 
 loanRouter.post("/", async (req, res) => {
-  const { email, amount } = req.query;
+  const { email, amount } = req.body;
   const currentAmount = await data.findByEmail(email);
   if (!email || !amount) {
     res
@@ -23,15 +23,12 @@ loanRouter.post("/", async (req, res) => {
       res.status(201).send();
     }
   } else {
-    const deuda = parseInt(currentAmount) + parseInt(amount);
+    const deuda = currentAmount + amount;
     if (deuda > MAX) {
       return res.status(200).json({ message: "Amount exceeded" });
     } else {
-      const newLoan = await data.setByEmail(
-        email,
-        parseInt(currentAmount) + parseInt(amount)
-      );
-      res.status(200).json({ Debt: newLoan });
+      const newLoan = await data.setByEmail(email, currentAmount + amount);
+      return res.status(200).json({ Debt: newLoan });
     }
   }
 });
