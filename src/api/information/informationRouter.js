@@ -1,8 +1,6 @@
 const express = require("express");
+const data = require("../../Database/database");
 const informationRouter = express.Router();
-
-const initialData = { "user@test.com": 100, "daniel@example.com": 50 };
-const data = require("../../Database/database")(initialData);
 
 informationRouter.get("/", async (req, res) => {
   const { email } = req.query;

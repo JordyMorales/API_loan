@@ -1,4 +1,4 @@
-module.exports = (persistence = {}) => {
+const data = (persistence = {}) => {
   const findByEmail = async email =>
     await new Promise(resolve => resolve(persistence[email]));
   const setByEmail = async (email, amount) =>
@@ -11,3 +11,5 @@ module.exports = (persistence = {}) => {
     setByEmail
   };
 };
+
+module.exports = data();
