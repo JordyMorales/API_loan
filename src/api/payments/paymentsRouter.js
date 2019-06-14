@@ -30,7 +30,7 @@ paymentsRouter.post("/", async (req, res) => {
     } else {
       const newDebt = await data.setByEmail(email, currentAmount - amount);
       return res
-        .status(200)
+        .status(201)
         .json({ message: "successful payment", debt: newDebt });
     }
   }
