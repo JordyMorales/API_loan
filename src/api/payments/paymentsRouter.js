@@ -20,16 +20,18 @@ paymentsRouter.post("/", async (req, res) => {
       .send();
   } else {
     if (currentAmount == 0) {
-      return res.status(200).json({ message: "No Debt" });
+      return res.status(200).json({ error: 101, message: "No Debt" });
     }
 
     if (amount > currentAmount) {
-      return res.status(200).json({ message: "Amount exceeds debt" });
+      return res
+        .status(200)
+        .json({ error: 100, message: "Amount exceeds debt" });
     } else {
       const newDebt = await data.setByEmail(email, currentAmount - amount);
       return res
         .status(200)
-        .json({ message: "successful payment", Debt: newDebt });
+        .json({ message: "successful payment", debt: newDebt });
     }
   }
 });

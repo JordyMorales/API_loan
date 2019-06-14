@@ -20,16 +20,15 @@ loanRouter.post("/", async (req, res) => {
         .json({ message: "We cannot accept loans over 50$ on first loan" });
     } else {
       const newAmount = await data.setByEmail(email, amount);
-      return res.status(201).json({ Debt: newAmount });
+      return res.status(201).json({ debt: newAmount });
     }
   } else {
     const debt = currentAmount + amount;
-    console.log(debt);
     if (debt > MAX) {
-      return res.status(200).json({ message: "Amount exceeded" });
+      return res.status(200).json({ error: 100, message: "Amount exceeded" });
     } else {
       const newLoan = await data.setByEmail(email, currentAmount + amount);
-      return res.status(200).json({ Debt: newLoan });
+      return res.status(200).json({ debt: newLoan });
     }
   }
 });

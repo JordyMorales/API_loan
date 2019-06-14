@@ -14,7 +14,7 @@ informationRouter.get("/", async (req, res) => {
   if (currentAmount == undefined) {
     res.status(204).send();
   } else {
-    res.status(200).json(currentAmount);
+    res.status(200).json({ amount: currentAmount });
   }
 });
 
