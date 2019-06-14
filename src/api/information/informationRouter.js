@@ -4,9 +4,7 @@ const informationRouter = express.Router();
 
 informationRouter.get("/", async (req, res) => {
   const { email } = req.query;
-  console.log(email);
   const currentAmount = await data.findByEmail(email);
-  console.log(typeof currentAmount);
   if (!email) {
     res
       .status(400)

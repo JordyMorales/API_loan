@@ -26,7 +26,7 @@ paymentsRouter.post("/", async (req, res) => {
     if (amount > currentAmount) {
       return res.status(200).json({ message: "Amount exceeds debt" });
     } else {
-      const newDebt = await data.setByEmail(email, amount - currentAmount);
+      const newDebt = await data.setByEmail(email, currentAmount - amount);
       return res
         .status(200)
         .json({ message: "successful payment", Debt: newDebt });
