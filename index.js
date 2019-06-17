@@ -14,3 +14,5 @@ app.use("/api/payments", paymentsRouter);
 app.use("/api/information", informationRouter);
 
 app.listen(port, () => console.log(`listening on port ${port}!`));
+
+module.exports = app;

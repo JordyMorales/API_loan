@@ -1,3 +1,5 @@
+const persistence = { "test@test.com": 45, "test4@test.com": 0 };
+
 const data = (persistence = {}) => {
   const findByEmail = async email =>
     await new Promise(resolve => resolve(persistence[email]));
@@ -12,4 +14,4 @@ const data = (persistence = {}) => {
   };
 };
 
-module.exports = data();
+module.exports = data(persistence);

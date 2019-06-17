@@ -8,10 +8,7 @@ loanRouter.post("/", async (req, res) => {
   const { email, amount = 0 } = req.body;
   const currentAmount = await data.findByEmail(email);
   if (!email || !amount) {
-    res
-      .status(400)
-      .json({ message: "Please send an email and the amount" })
-      .send();
+    res.status(400).json({ message: "Please send an email and the amount" });
   }
   if (currentAmount == undefined) {
     if (amount > 50) {
